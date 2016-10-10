@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter { 
 	@Override
 	protected void configure(HttpSecurity http) {
 		try {
@@ -22,18 +22,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			http
 				.userDetailsService(userDetailsService())
 				.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/index.jsf").permitAll()
-				.anyRequest().authenticated()
-				.and()
-				.formLogin()
-				.loginPage("/login.jsf")
-				.permitAll()
-				.failureUrl("/login.jsf?error=true")
-				.defaultSuccessUrl("/index.jsf")
-				.and()
-				.logout()
-				.logoutSuccessUrl("/login.jsf");
+				.antMatchers("/**").permitAll();       //FIXME remove DEBUG code
+//				.antMatchers("/").permitAll()          //FIXME re-enable (+ allow ICEfaces resources + provide login page)
+//				.antMatchers("/index.jsf").permitAll()
+//				.anyRequest().authenticated()
+//				.and()
+//				.formLogin()
+//				.loginPage("/login.jsf")
+//				.permitAll()
+//				.failureUrl("/login.jsf?error=true")
+//				.defaultSuccessUrl("/index.jsf")
+//				.and()
+//				.logout()
+//				.logoutSuccessUrl("/login.jsf");
 		}
 		catch (Exception ex) {
 			throw new RuntimeException(ex);
